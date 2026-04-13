@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадьба, которая могла переписать историю Европы</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --gold-dark: #8a6d2b;
+  --gold-muted: #a08840;
+  --ink: #13110d;
+  --ink-light: #1e1a14;
+  --parchment: #f0e9d8;
+  --parchment-dark: #d8cdb5;
+  --sepia: #3d2e1c;
+  --red-empire: #8b2500;
+  --red-light: #c4593a;
+  --blue-empire: #1a3a5c;
+  --blue-light: #3a6a9c;
+  --green-dark: #2d4a3e;
+  --green-light: #4a7a6a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--parchment-dark);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(180deg, rgba(19,17,13,0.95) 0%, rgba(19,17,13,0) 100%);
+  pointer-events: none; transition: all 0.4s;
+}
+.nav.scrolled {
+  background: rgba(19,17,13,0.97); backdrop-filter: blur(10px);
+  pointer-events: auto; border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.8rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); opacity: 0.7; pointer-events: auto; text-decoration: none;
+}
+.nav-progress {
+  height: 2px; position: absolute; bottom: 0; left: 0;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  transition: width 0.15s;
+}
+
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(139,37,0,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(26,58,92,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 40%),
+    var(--ink);
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z' fill='none' stroke='%23c9a84c' stroke-width='0.2' opacity='0.06'/%3E%3C/svg%3E");
+  animation: drift 80s linear infinite;
+}
+@keyframes drift { from { transform: translate(0,0); } to { transform: translate(80px,80px); } }
+
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 860px; padding: 2rem;
+}
+.hero-content > * { opacity: 0; animation: fadeUp 1s ease-out forwards; }
+.hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.5s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.8s; }
+.hero-content > *:nth-child(4) { animation-delay: 1.1s; }
+.hero-content > *:nth-child(5) { animation-delay: 1.4s; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-badge {
+  display: inline-block; font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-muted); border: 1px solid rgba(201,168,76,0.25);
+  padding: 0.5em 1.8em; margin-bottom: 2.5rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(2rem, 5.5vw, 3.8rem); color: var(--parchment);
+  line-height: 1.15; margin-bottom: 1.8rem;
+}
+.hero h1 em { color: var(--gold); font-style: italic; font-weight: 700; }
+.hero-lead {
+  font-size: 1.05rem; color: var(--parchment-dark); opacity: 0.75;
+  line-height: 1.75; max-width: 680px; margin: 0 auto 2rem;
+}
+.hero-thesis {
+  font-size: 0.95rem; color: var(--gold-light); opacity: 0.55;
+  line-height: 1.7; max-width: 620px; margin: 0 auto 3rem; font-style: italic;
+}
+.scroll-cue {
+  color: var(--gold-muted); opacity: 0.4;
+  font-family: 'Cormorant Garamond', serif; font-size: 0.75rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+}
+.scroll-cue::after {
+  content: ''; display: block; width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold-dark), transparent);
+  margin: 1rem auto 0;
+}
+
+.container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.container-wide { max-width: 1020px; margin: 0 auto; padding: 0 1.5rem; }
+section { position: relative; padding: 5rem 0; }
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-number {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold-dark); display: block; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--parchment); margin-bottom: 0.6rem; font-weight: 700;
+}
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.9rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-muted); opacity: 0.6;
+}
+.ornament {
+  text-align: center; padding: 1rem 0;
+  color: var(--gold-dark); font-size: 0.9rem;
+  letter-spacing: 0.6em; opacity: 0.3; user-select: none;
+}
+
+.prose { font-size: 1rem; line-height: 1.85; color: var(--parchment-dark); }
+.prose p + p { margin-top: 1.3rem; }
+.prose strong { color: var(--gold); font-weight: 600; }
+.prose em { color: var(--parchment); font-style: italic; }
+
+.quote-block {
+  margin: 2rem 0; padding: 1.5rem 2rem;
+  border-left: 3px solid var(--gold-dark);
+  background: rgba(201,168,76,0.04); border-radius: 0 4px 4px 0;
+}
+.quote-block p {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.05rem; color: var(--parchment); line-height: 1.7;
+}
+.quote-block cite {
+  display: block; margin-top: 0.8rem;
+  font-family: 'Cormorant Garamond', serif; font-style: normal;
+  font-size: 0.85rem; color: var(--gold-muted); letter-spacing: 0.05em;
+}
+
+.bg-g1 { background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%); }
+.bg-g2 { background: linear-gradient(180deg, var(--ink-light) 0%, #151210 100%); }
+.bg-g3 { background: linear-gradient(180deg, #151210 0%, var(--ink) 100%); }
+.bg-g4 { background: linear-gradient(180deg, var(--ink) 0%, #0d0b08 100%); }
+
+.actors-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;
+}
+@media (max-width: 640px) { .actors-grid { grid-template-columns: 1fr; } }
+.actor-card {
+  background: rgba(244,237,224,0.025); border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 4px; padding: 1.8rem; transition: border-color 0.3s, transform 0.3s;
+}
+.actor-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+.actor-role {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: 0.5rem;
+}
+.actor-card h3 { font-family: 'Playfair Display', serif; color: var(--parchment); font-size: 1.1rem; margin-bottom: 0.7rem; }
+.actor-card p { font-size: 0.9rem; line-height: 1.7; opacity: 0.8; }
+
+/* MAP */
+.map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; }
+.europe-map {
+  width: 100%; position: relative; aspect-ratio: 1.5;
+  background:
+    radial-gradient(ellipse at 40% 45%, rgba(26,58,92,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 65% 30%, rgba(139,37,0,0.06) 0%, transparent 40%),
+    linear-gradient(135deg, #0d0b08 0%, #151210 100%);
+  border: 1px solid rgba(201,168,76,0.15); border-radius: 4px; overflow: hidden;
+}
+.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.map-point { position: absolute; cursor: pointer; z-index: 3; transition: transform 0.3s ease; }
+.map-point:hover, .map-point.active { transform: scale(1.15); }
+.map-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--parchment);
+  box-shadow: 0 0 16px rgba(201,168,76,0.4); position: relative;
+}
+.map-dot::after {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.25); animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse { 0%,100%{transform:scale(1);opacity:.8} 50%{transform:scale(1.6);opacity:0} }
+.map-dot.ally { background: var(--blue-empire); border-color: #a8c4d4; box-shadow: 0 0 16px rgba(26,58,92,0.5); }
+.map-dot.enemy { background: var(--red-empire); border-color: #d4a8a8; box-shadow: 0 0 16px rgba(139,37,0,0.5); }
+.map-dot.buffer { background: var(--green-dark); border-color: #a8d4b8; box-shadow: 0 0 16px rgba(45,74,62,0.5); }
+.map-label {
+  position: absolute; white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+  color: var(--parchment); letter-spacing: 0.06em;
+  top: -22px; left: 50%; transform: translateX(-50%);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9); font-weight: 600;
+}
+.map-tooltip {
+  display: none; position: absolute; bottom: calc(100% + 28px);
+  left: 50%; transform: translateX(-50%); width: 270px;
+  background: rgba(19,17,13,0.97); border: 1px solid var(--gold-dark);
+  border-radius: 4px; padding: 1.2rem; font-size: 0.82rem;
+  color: var(--parchment-dark); line-height: 1.6; z-index: 10;
+  backdrop-filter: blur(8px);
+}
+.map-tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 6px solid transparent; border-top-color: var(--gold-dark);
+}
+.map-tooltip h4 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 0.9rem; margin-bottom: 0.4rem; }
+.map-point:hover .map-tooltip, .map-point.active .map-tooltip { display: block; }
+.map-point[data-edge="left"] .map-tooltip { left: 0; transform: none; }
+.map-point[data-edge="left"] .map-tooltip::after { left: 7px; transform: none; }
+.map-point[data-edge="right"] .map-tooltip { left: auto; right: 0; transform: none; }
+.map-point[data-edge="right"] .map-tooltip::after { left: auto; right: 7px; transform: none; }
+.map-legend { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.legend-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 0.78rem;
+  color: var(--parchment-dark); opacity: 0.6; letter-spacing: 0.05em;
+}
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.legend-dot.a { background: var(--blue-empire); }
+.legend-dot.e { background: var(--red-empire); }
+.legend-dot.b { background: var(--green-dark); }
+
+/* STAT STRIP */
+.stat-strip {
+  display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  margin: 2.5rem 0; padding: 2rem 0;
+  border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.stat { text-align: center; }
+.stat-value { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); line-height: 1; }
+.stat-label {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.75rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--parchment-dark); opacity: 0.5; margin-top: 0.4rem;
+}
+
+/* CONS CARDS */
+.cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 640px) { .cons-grid { grid-template-columns: 1fr; } }
+.cons-card {
+  background: rgba(244,237,224,0.025); border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 4px; padding: 1.8rem; transition: border-color 0.3s;
+}
+.cons-card:hover { border-color: rgba(201,168,76,0.3); }
+.cons-card h3 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.05rem; margin-bottom: 0.7rem; }
+.cons-card p { font-size: 0.9rem; line-height: 1.7; opacity: 0.85; }
+
+/* CHAIN */
+.chain { max-width: 600px; margin: 0 auto; }
+.chain-link {
+  position: relative; padding: 1.2rem 1.5rem;
+  background: rgba(244,237,224,0.025); border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 4px; font-size: 0.92rem; line-height: 1.6;
+  opacity: 0; transform: translateY(15px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.chain-link.visible { opacity: 1; transform: translateY(0); }
+.chain-link strong { color: var(--gold); }
+.chain-arrow { text-align: center; color: var(--gold-dark); font-size: 1.2rem; padding: 0.4rem 0; opacity: 0.4; }
+.chain-break { text-align: center; padding: 1rem 0; margin: 0.5rem 0; }
+.chain-break-line {
+  display: inline-block; padding: 0.6em 1.5em;
+  border: 2px solid var(--red-empire); border-radius: 4px;
+  color: var(--red-light); font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+  background: rgba(139,37,0,0.1);
+}
+
+/* TIMELINE */
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+.timeline::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent 0%, var(--gold-dark) 10%, var(--gold) 50%, var(--gold-dark) 90%, transparent 100%);
+}
+@media (max-width: 700px) { .timeline::before { left: 16px; } }
+.tl-item {
+  display: flex; align-items: flex-start; margin-bottom: 3.5rem; position: relative;
+  opacity: 0; transform: translateY(25px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateY(0); }
+.tl-item:nth-child(odd) { flex-direction: row-reverse; text-align: right; }
+@media (max-width: 700px) {
+  .tl-item, .tl-item:nth-child(odd) { flex-direction: row; text-align: left; padding-left: 44px; }
+}
+.tl-content { flex: 0 0 50%; padding: 0 2.2rem; }
+@media (max-width: 700px) { .tl-content { flex: 1; padding: 0; } }
+.tl-dot {
+  position: absolute; left: 50%; top: 0.4rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold); border: 3px solid var(--ink);
+  transform: translateX(-50%); box-shadow: 0 0 10px rgba(201,168,76,0.35); z-index: 2;
+}
+@media (max-width: 700px) { .tl-dot { left: 16px; } }
+.tl-date { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--gold); margin-bottom: 0.3rem; }
+.tl-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--parchment); margin-bottom: 0.5rem; font-weight: 700; }
+.tl-desc { font-size: 0.88rem; line-height: 1.7; opacity: 0.8; }
+.tl-tag {
+  display: inline-block; font-family: 'Cormorant Garamond', serif;
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.2em 0.7em; border-radius: 2px; margin-top: 0.6rem;
+}
+.tag-d { background: rgba(26,58,92,0.25); color: #7ab0d4; border: 1px solid rgba(26,58,92,0.4); }
+.tag-w { background: rgba(139,37,0,0.25); color: #d4897a; border: 1px solid rgba(139,37,0,0.4); }
+.tag-e { background: rgba(45,74,62,0.25); color: #7ad4a0; border: 1px solid rgba(45,74,62,0.4); }
+.tag-c { background: rgba(201,168,76,0.12); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.25); }
+
+/* HISTORIANS */
+.hist-list { max-width: 700px; margin: 0 auto; }
+.hist-item { padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.08); }
+.hist-item:last-child { border-bottom: none; }
+.hist-author { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--parchment); font-weight: 700; }
+.hist-work { font-style: italic; font-size: 0.88rem; color: var(--gold-muted); margin-top: 0.2rem; }
+.hist-note { font-size: 0.88rem; line-height: 1.6; opacity: 0.75; margin-top: 0.4rem; }
+
+/* CONCLUSION */
+.conclusion-box {
+  max-width: 700px; margin: 0 auto; text-align: center;
+  padding: 3rem 2.5rem; border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px; background: radial-gradient(ellipse at center, rgba(201,168,76,0.04) 0%, transparent 70%);
+}
+.conclusion-box blockquote {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.15rem; color: var(--parchment); line-height: 1.65; margin-bottom: 1.5rem;
+}
+.conclusion-box .attr {
+  color: var(--gold-muted); font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem; letter-spacing: 0.1em;
+}
+
+.footer {
+  text-align: center; padding: 3rem 2rem; background: #0a0908;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.footer p { color: rgba(244,237,224,0.25); font-size: 0.78rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.1em; }
+.footer a { color: var(--gold-muted); text-decoration: none; transition: color 0.3s; }
+.footer a:hover { color: var(--gold); }
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  section { padding: 3.5rem 0; }
+  .stat-strip { gap: 1.5rem; }
+  .stat-value { font-size: 1.5rem; }
+  .quote-block { padding: 1.2rem 1.5rem; }
+  .conclusion-box { padding: 2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#">Альтернативная история</a>
+  <div class="nav-progress" id="progress" style="width:0%"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Контрфактуальный анализ</div>
+    <h1>Свадьба, которая могла <em>переписать историю</em> Европы</h1>
+    <p class="hero-lead">Династический брак Наполеона с русской великой княжной мог предотвратить катастрофу 1812 года, не допустить объединения Германии под прусским штыком и разрушить цепочку событий, приведшую к двум мировым войнам.</p>
+    <p class="hero-thesis">В 1808–1810 годах переговоры шли всерьёз, и решение висело на волоске. Отказ Романовых стал одним из поворотных моментов мировой истории.</p>
+    <div class="scroll-cue">Листайте вниз</div>
+  </div>
+</section>
+
+<!-- I. TALLEYRAND -->
+<section class="bg-g1">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">Глава I</span>
+      <h2 class="section-title">Как Талейран украл у Наполеона невесту</h2>
+      <div class="section-subtitle">Эрфурт — Петербург — Париж, 1808–1810</div>
+    </div>
+    <div class="prose">
+      <p>Идея породниться с Романовыми появилась у Наполеона после <strong>Тильзитского мира</strong> (25 июня 1807 года), превратившего Россию из врага в союзника. Однако союз был непрочным: Россия была вынуждена присоединиться к Континентальной блокаде Англии, разорявшей её экономику. Наполеон рассчитывал скрепить альянс браком — самым надёжным дипломатическим инструментом эпохи.</p>
+      <p>На <strong>Эрфуртском конгрессе</strong> (осень 1808) Наполеон поручил Талейрану прощупать почву. Двадцатилетняя <strong>Екатерина Павловна</strong> рассматривалась как главная кандидатка. Александр I ответил уклончиво: не могу распоряжаться рукой сестры без согласия матери.</p>
+      <p>Но именно в этот момент произошло событие, кардинально изменившее ход переговоров. Талейран, формально действуя от имени Наполеона, <strong>тайно предупредил Александра</strong>: «На вас возложена миссия спасти Европу, и вы сможете это сделать, только противясь Наполеону». Он прямо посоветовал царю не выдавать сестру. С осени 1808 года Талейран стал тайным осведомителем Петербурга и одновременно получал деньги от Австрии.</p>
+    </div>
+    <div class="quote-block">
+      <p>«Я лучше выйду замуж за простого русского кочегара, чем за этого корсиканца»</p>
+      <cite>— Екатерина Павловна, великая княжна</cite>
+    </div>
+    <div class="prose">
+      <p>Через неделю после конгресса Романовы объявили о помолвке Екатерины с принцем Георгом Ольденбургским — вдовствующая императрица Мария Фёдоровна форсировала свадьбу, чтобы закрыть тему. Наполеон переключился на младшую сестру — <strong>четырнадцатилетнюю Анну Павловну</strong>. Александр демонстрировал показное одобрение, но затягивал процесс и выставил заведомо неприемлемое условие: Франция должна гарантировать невосстановление Польши.</p>
+      <p><strong>21 января 1810 года</strong> Наполеон созвал Тайный совет. Три кандидатуры: Мария Августа Саксонская, Анна Павловна, Мария-Луиза Австрийская. Мюрат, Фуше и Камбасерес голосовали за русский брак; Талейран и Эжен Богарне — за австрийский. 7 февраля, получив очередную уклончивую депешу из Петербурга, разъярённый Наполеон подписал контракт с Австрией. 11 марта состоялось венчание по доверенности в Вене.</p>
+    </div>
+    <div class="actors-grid">
+      <div class="actor-card">
+        <div class="actor-role">Предатель</div>
+        <h3>Шарль-Морис де Талейран</h3>
+        <p>Тайно предупредил Александра и стал осведомителем Петербурга через Нессельроде. Одновременно получал деньги от Австрии. Предательство ближайшего советника — ключевой фактор провала.</p>
+      </div>
+      <div class="actor-card">
+        <div class="actor-role">Вдовствующая императрица</div>
+        <h3>Мария Фёдоровна</h3>
+        <p>Форсировала свадьбу Екатерины с Ольденбургским. По Анне настаивала на двухлетней отсрочке до семнадцатилетия. Формально не давала отказа — но делала всё, чтобы брак не состоялся.</p>
+      </div>
+      <div class="actor-card">
+        <div class="actor-role">Император России</div>
+        <h3>Александр I</h3>
+        <p>Показное одобрение и систематическое затягивание. Реальные причины: личная ненависть после Аустерлица, проанглийская ориентация, экономический ущерб от блокады и нежелание делить Восточную Европу.</p>
+      </div>
+      <div class="actor-card">
+        <div class="actor-role">Император Франции</div>
+        <h3>Наполеон Бонапарт</h3>
+        <p>Искал легитимность через брак с древней династией. Отказ воспринял как унижение. Нетерпение и гнев толкнули к австрийскому варианту — и в конечном счёте к войне с Россией.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- II. WAR PREVENTION -->
+<section class="bg-g2">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">Глава II</span>
+      <h2 class="section-title">Мог ли брак предотвратить 1812 год?</h2>
+      <div class="section-subtitle">Структурные противоречия vs. династические узы</div>
+    </div>
+    <div class="prose">
+      <p><strong>Скорее всего, война в форме тотального вторжения не состоялась бы.</strong> Но структурные противоречия делали конфликт вероятным в долгосрочной перспективе.</p>
+      <p>Аргументы в пользу предотвращения весомы. Несколько ключевых раздражителей исчезают: Наполеон не аннексировал бы Герцогство Ольденбургское (владение мужа Екатерины Павловны), личного унижения отказа не существовало бы, а символический вес династических уз делал бы войну психологически труднее. Австрийская война 1809 года вероятно не произошла бы — «партия войны» в Вене строила расчёты именно на отсутствии прочного франко-русского союза.</p>
+    </div>
+    <div class="stat-strip">
+      <div class="stat"><div class="stat-value">1300%</div><div class="stat-label">Рост госдолга России<br>1807–1812</div></div>
+      <div class="stat"><div class="stat-value">−50%</div><div class="stat-label">Падение курса<br>бумажного рубля</div></div>
+      <div class="stat"><div class="stat-value">−40%</div><div class="stat-label">Сокращение<br>экспорта</div></div>
+      <div class="stat"><div class="stat-value">600K</div><div class="stat-label">Солдат Grande Armée<br>вторглись в Россию</div></div>
+    </div>
+    <div class="prose">
+      <p>Однако структурные причины были глубоки. <strong>Экономический фактор</strong> был решающим: Континентальная блокада привела к катастрофическому росту госдолга и падению экспорта. Русская экономика жизненно зависела от торговли с Британией — зерно, лён, пенька, лес составляли основу экспорта. Никакой брак не мог решить эту фундаментальную проблему.</p>
+      <p><strong>Польский вопрос</strong> был неразрешимым: три проекта конвенции провалились. Наполеон отказывался отречься от польских сторонников, Александр требовал именно этого. А историческая аналогия показательна: брак с Марией-Луизой не помешал Австрии присоединиться к коалиции в 1813 году.</p>
+      <p>Наиболее вероятный сценарий: <strong>конфликт откладывается на 5–10 лет</strong>. Модифицированная блокада с российскими исключениями могла бы снизить давление. Если война и произошла бы, она приняла бы форму ограниченного конфликта из-за Польши — не тотального вторжения с 600-тысячной армией.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- III. MAP -->
+<section class="bg-g3">
+  <div class="container-wide">
+    <div class="section-header">
+      <span class="section-number">Глава III</span>
+      <h2 class="section-title">Новый баланс сил</h2>
+      <div class="section-subtitle">Европа после династического союза</div>
+    </div>
+    <div class="map-wrapper">
+      <div class="europe-map">
+        <svg class="map-svg" viewBox="0 0 1000 667" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="ax" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:0.7"/>
+              <stop offset="50%" style="stop-color:#c9a84c;stop-opacity:0.5"/>
+              <stop offset="100%" style="stop-color:#1a3a5c;stop-opacity:0.7"/>
+            </linearGradient>
+          </defs>
+          <line x1="38%" y1="48%" x2="72%" y2="20%" stroke="url(#ax)" stroke-width="2.5" stroke-dasharray="10 5" opacity="0.6">
+            <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="38%" y1="48%" x2="50%" y2="40%" stroke="rgba(201,168,76,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="38%" y1="48%" x2="52%" y2="52%" stroke="rgba(139,37,0,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="38%" y1="48%" x2="24%" y2="70%" stroke="rgba(201,168,76,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+          <circle cx="33%" cy="34%" r="50" fill="none" stroke="rgba(139,37,0,0.2)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </svg>
+        <div class="map-point" style="left:36%;top:46%">
+          <div class="map-dot ally"></div><span class="map-label">Париж</span>
+          <div class="map-tooltip"><h4>Париж — западный полюс</h4>Столица Наполеона — центр франко-русской оси. Династический брак с Романовыми придаёт легитимность. Западная и Центральная Европа — французская сфера влияния.</div>
+        </div>
+        <div class="map-point" style="left:70%;top:17%" data-edge="right">
+          <div class="map-dot ally"></div><span class="map-label">Петербург</span>
+          <div class="map-tooltip"><h4>Петербург — восточный полюс</h4>Россия получает свободу действий на юге — Османская империя и проливы. Модифицированная блокада с исключениями для российских портов снижает экономическое давление.</div>
+        </div>
+        <div class="map-point" style="left:50%;top:50%">
+          <div class="map-dot enemy"></div><span class="map-label">Вена</span>
+          <div class="map-tooltip"><h4>Вена — главный проигравший</h4>Зажата между Францией и Россией. Стратегия Меттерниха — балансирование между Парижем и Петербургом — лишается основы. Габсбурги становятся младшим партнёром.</div>
+        </div>
+        <div class="map-point" style="left:31%;top:32%" data-edge="left">
+          <div class="map-dot enemy"></div><span class="map-label">Лондон</span>
+          <div class="map-tooltip"><h4>Лондон — в изоляции</h4>Без континентальных союзников. Блокада работает эффективнее. Изолированный морской гегемон с колониальной империей, вынужденный искать компромисс.</div>
+        </div>
+        <div class="map-point" style="left:48%;top:38%">
+          <div class="map-dot buffer"></div><span class="map-label">Берлин</span>
+          <div class="map-tooltip"><h4>Берлин — без шанса на реванш</h4>Территория Пруссии сократилась вдвое после Тильзита: с 124 868 до 61 339 кв. миль, население — с 9,75 до 4,5 млн. Рейнский союз блокирует прусское лидерство.</div>
+        </div>
+        <div class="map-point" style="left:61%;top:68%">
+          <div class="map-dot buffer"></div><span class="map-label">Константинополь</span>
+          <div class="map-tooltip"><h4>Константинополь — объект раздела</h4>В Тильзите обсуждался раздел Османской империи: России — Молдавия, Валахия, проливы. Франции — Египет, Левант. При реальном союзе раздел осуществим.</div>
+        </div>
+        <div class="map-point" style="left:22%;top:69%" data-edge="left">
+          <div class="map-dot enemy"></div><span class="map-label">Мадрид</span>
+          <div class="map-tooltip"><h4>Мадрид — незаживающая рана</h4>Испанская язва продолжает истощать ресурсы Франции. Партизанская война на Пиренеях остаётся стратегической проблемой даже с русским союзом.</div>
+        </div>
+        <div class="map-point" style="left:55%;top:42%">
+          <div class="map-dot buffer"></div><span class="map-label">Варшава</span>
+          <div class="map-tooltip"><h4>Варшава — точка напряжения</h4>Польский вопрос неразрешим. Герцогство Варшавское — потенциальный повод для будущего конфликта внутри альянса. Три проекта конвенции уже провалились.</div>
+        </div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot a"></div> Ось Париж — Петербург</div>
+        <div class="legend-item"><div class="legend-dot e"></div> Проигравшие / изолированные</div>
+        <div class="legend-item"><div class="legend-dot b"></div> Буферные зоны / точки напряжения</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- IV. WITHOUT WATERLOO -->
+<section class="bg-g1">
+  <div class="container-wide">
+    <div class="section-header">
+      <span class="section-number">Глава IV</span>
+      <h2 class="section-title">Европа без Ватерлоо</h2>
+      <div class="section-subtitle">От Пруссии до мировых войн</div>
+    </div>
+    <div class="container">
+      <div class="prose" style="margin-bottom:2.5rem">
+        <p>Самые глубокие последствия касались бы не Франции и не России, а <strong>Германии</strong>. Прусские военные реформы Штейна, Шарнхорста и Гнейзенау — отмена крепостного права, всеобщая воинская повинность — были ответом на унижение при Тильзите. Но их катализатором стала война 1812 года и «Освободительные войны» 1813-го. Без русской катастрофы Наполеона Пруссия оставалась бы усечённым, слабым государством.</p>
+      </div>
+    </div>
+    <div class="cons-grid" style="max-width:940px;margin:0 auto;padding:0 1.5rem">
+      <div class="cons-card">
+        <h3>Нет немецкого национального мифа</h3>
+        <p>Без «Освободительных войн» исчезает мифология: речи Фихте, стихи Арндта, буршеншафты. Без мифа невозможны войны объединения Бисмарка, невозможен «путь крови и железа».</p>
+      </div>
+      <div class="cons-card">
+        <h3>Рейнский союз навсегда</h3>
+        <p>Конфедерация немецких государств под французским протекторатом становится постоянной. Объединение — если бы состоялось — пошло бы через Таможенный союз, под баварским руководством.</p>
+      </div>
+      <div class="cons-card">
+        <h3>Австрия в тисках</h3>
+        <p>Зажата между двумя империями-союзниками. Стратегия балансирования лишается основы. Габсбурги из великой державы превращаются в младшего партнёра франко-русского кондоминиума.</p>
+      </div>
+      <div class="cons-card">
+        <h3>Биполярный мир</h3>
+        <p>Вместо Венского конгресса с пятью великими державами — франко-русский кондоминиум. Наполеон предвидел это на Святой Елене: «У меня тоже был бы мой Конгресс и мой Священный союз».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- V. CHAIN -->
+<section class="bg-g2">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">Глава V</span>
+      <h2 class="section-title">Цепочка к мировым войнам</h2>
+      <div class="section-subtitle">Шесть звеньев от отказа до Сараево</div>
+    </div>
+    <div class="chain">
+      <div class="chain-link">Отказ Романовых → ухудшение отношений → <strong>вторжение 1812 года</strong> → крах Наполеона</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-break"><span class="chain-break-line">✕ Династический брак разрывает цепочку здесь</span></div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-link">Венский конгресс → консервативная реставрация → <strong>Священный союз</strong></div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-link">Революции 1848 → провал либерального объединения Германии</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-link">Войны Бисмарка (1864–1871) → <strong>Германская империя</strong> под прусским руководством</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-link">Германия как гегемон → <strong>Тройственный союз</strong> vs. <strong>Антанта</strong></div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-link">Балканские кризисы → <strong>Первая мировая война</strong> → Версаль → <strong>Вторая мировая</strong></div>
+    </div>
+    <div class="prose" style="margin-top:2.5rem">
+      <p>Это не означает вечного мира. Биполярная система порождала бы собственные конфликты: британское противодействие, националистические восстания, соперничество за Константинополь. Историк Пол Шрёдер подчёркивает: структурные факторы великодержавного конфликта действуют независимо от конфигурации альянсов. Но <strong>специфическая конфигурация</strong>, превратившая региональный балканский кризис в мировую войну, просто не существовала бы.</p>
+      <p>Реальная франко-русская военная конвенция 1894 года не предотвратила войну, а стала её катализатором. Но наполеоновская версия альянса действовала бы в иных условиях: не два равных партнёра, балансирующих германскую угрозу, а <strong>две доминирующие державы, подавляющие саму возможность появления такой угрозы</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- VI. TIMELINE -->
+<section class="bg-g3">
+  <div class="container-wide">
+    <div class="section-header">
+      <span class="section-number">Глава VI</span>
+      <h2 class="section-title">Альтернативная хронология</h2>
+      <div class="section-subtitle">Реконструкция событий</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1810</div>
+        <div class="tl-title">Свадьба в Париже</div>
+        <div class="tl-desc">Анна Павловна становится императрицей Франции. Подписан секретный протокол о разделе сфер влияния. Континентальная блокада модифицирована: российские порты получают исключения для контролируемой торговли.</div>
+        <span class="tl-tag tag-d">Дипломатия</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1811</div>
+        <div class="tl-title">Наследник двух империй</div>
+        <div class="tl-desc">Рождается сын — Наполеон Александр. Кровь Романовых и Бонапартов. Легитимистская Европа в шоке: корсиканец породнился с древнейшей династией. Австрия лишается козыря — брачного союза с Наполеоном.</div>
+        <span class="tl-tag tag-d">Дипломатия</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1812</div>
+        <div class="tl-title">Удар по Османам вместо России</div>
+        <div class="tl-desc">Grande Armée направляется на юг. Совместная франко-русская кампания. России — Молдавия, Валахия, проливы. Франции — Египет, Сирия, Левант. 600 тысяч солдат остаются живы.</div>
+        <span class="tl-tag tag-w">Война</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1813</div>
+        <div class="tl-title">Кризис Британии</div>
+        <div class="tl-desc">Эффективная блокада подрывает британскую экономику. Без континентальных союзников Лондон теряет рычаги. Парламент дебатирует о переговорах с Наполеоном.</div>
+        <span class="tl-tag tag-e">Экономика</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1815</div>
+        <div class="tl-title">Амьенский мир II</div>
+        <div class="tl-desc">Британия соглашается на переговоры. Биполярный мир: франко-русский блок и британская морская империя. Нет Ватерлоо, нет Венского конгресса, нет Священного союза.</div>
+        <span class="tl-tag tag-d">Дипломатия</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1820-е</div>
+        <div class="tl-title">Трещины в альянсе</div>
+        <div class="tl-desc">Амбиции сталкиваются: Балканы, Польша, торговые маршруты. Константинополь — точка конфликта: Россия хочет проливы, Франция — контроль над Левантом. Александр I стареет, в России усиливается антифранцузская партия.</div>
+        <span class="tl-tag tag-d">Дипломатия</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1830-е</div>
+        <div class="tl-title">Ускоренная индустриализация</div>
+        <div class="tl-desc">Без разрушительных войн Европа индустриализируется раньше и равномернее. Франко-русский технологический обмен. Железные дороги связывают Париж и Петербург. Германский вопрос решается торговлей, а не штыком.</div>
+        <span class="tl-tag tag-e">Экономика</span>
+      </div></div>
+
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+        <div class="tl-date">1840-е</div>
+        <div class="tl-title">Мир без Бисмарка</div>
+        <div class="tl-desc">Наполеон Александр наследует обе политические традиции. Подавленные национальные движения в Германии и Италии находят мирные каналы — конфедерации, парламенты, Zollverein. Нет «пути крови и железа».</div>
+        <span class="tl-tag tag-c">Культура</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- VII. HISTORIANS -->
+<section class="bg-g4">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">Глава VII</span>
+      <h2 class="section-title">Что говорят историки</h2>
+      <div class="section-subtitle">Между академией и воображением</div>
+    </div>
+    <div class="hist-list">
+      <div class="hist-item">
+        <div class="hist-author">Альбер Вандаль</div>
+        <div class="hist-work">«Napoléon et Alexandre Ier» (1894), 3 тома</div>
+        <div class="hist-note">Фундаментальное исследование дипломатии брачных переговоров. Основной академический источник по теме.</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-author">Сергей Татищев</div>
+        <div class="hist-work">Тайная переписка о несостоявшемся браке (1890)</div>
+        <div class="hist-note">Первая публикация секретной корреспонденции. Прямо утверждал, что неудачное сватовство — одна из причин войны 1812 года.</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-author">Луи Жоффруа-Шато</div>
+        <div class="hist-work">«Napoléon et la conquête du monde» (1836)</div>
+        <div class="hist-note">Первый в мировой литературе альтернативно-исторический роман: Наполеон побеждает в России и завоёвывает мир.</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-author">Валери Жискар д'Эстен</div>
+        <div class="hist-work">«La Victoire de la Grande Armée» (2010)</div>
+        <div class="hist-note">Бывший президент Франции исследует альтернативный 1812: общеевропейский конгресс в Страсбурге вместо Венского.</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-author">Пол Шрёдер</div>
+        <div class="hist-work">«Embedded Counterfactuals and World War I»</div>
+        <div class="hist-note">Структурные факторы великодержавного конфликта действуют независимо от альянсов — но форма и масштаб конфликта зависят от конфигурации критически.</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-author">В.Н. Земцов</div>
+        <div class="hist-work">«Наполеон и его эпоха в зеркале альтернативной истории» (2016)</div>
+        <div class="hist-note">Академический анализ жанра наполеоновской контрфактуальной историографии в «Французском ежегоднике».</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<!-- CONCLUSION -->
+<section style="background:var(--ink)">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">Заключение</span>
+      <h2 class="section-title">Точка бифуркации, а не гарантия мира</h2>
+    </div>
+    <div class="conclusion-box">
+      <blockquote>Главный вывод не в том, что брак гарантировал бы мир, а в том, что он разрывал конкретную причинно-следственную цепочку, приведшую к прусскому объединению Германии, системе враждебных альянсов и мировым войнам. Такой мир не был бы утопией — но две катастрофы, унёсшие десятки миллионов жизней, были бы попросту немыслимы в той форме, в какой они произошли.</blockquote>
+      <div class="attr">Анализ выполнен Claude (Anthropic) · 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Создано с помощью AI · <a href="https://t.me/">Marketing Sentiment</a></p>
+</footer>
+
+<script>
+const nav=document.getElementById('nav'),progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(s/t)*100+'%';
+  nav.classList.toggle('scrolled',s>80);
+},{passive:true});
+
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.tl-item,.chain-link').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.map-point').forEach(p=>{
+  p.addEventListener('click',e=>{
+    const w=p.classList.contains('active');
+    document.querySelectorAll('.map-point').forEach(pp=>pp.classList.remove('active'));
+    if(!w)p.classList.add('active');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',()=>{
+  document.querySelectorAll('.map-point').forEach(p=>p.classList.remove('active'));
+});
+</script>
+
+</body>
+</html>
